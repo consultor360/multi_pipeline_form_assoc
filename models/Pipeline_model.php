@@ -5,6 +5,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Pipeline_model extends App_Model
 {
+        // Declaração explícita das propriedades
+        protected $table_pipelines;
+        protected $table_stages;
+    
     public function __construct()
     {
         parent::__construct();
@@ -14,8 +18,8 @@ class Pipeline_model extends App_Model
         $this->load->helper('date');
         
         // Inicializar variáveis de configuração
-        $this->table_pipelines = 'tblmulti_pipeline_pipelines';
-        $this->table_stages = 'tblmulti_pipeline_stages';
+        $this->table_pipelines = db_prefix() . 'multi_pipeline_pipelines';
+        $this->table_stages = db_prefix() . 'multi_pipeline_stages';
     }
 
     /**
