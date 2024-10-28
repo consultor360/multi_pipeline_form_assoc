@@ -20,6 +20,7 @@ function multi_pipeline_install()
     create_statuses_table($CI);
     create_api_tokens_table($CI);
     create_assignments_table($CI);
+    create_form_associations_table($CI);
     
     // Adicionar colunas extras
     add_order_column_to_stages_table($CI);
@@ -378,5 +379,49 @@ function create_assignments_table($CI)
     $CI->dbforge->add_key('pipeline_id'); // Adiciona chave estrangeira para pipeline_id
     $CI->dbforge->add_key('staff_id'); // Adiciona chave estrangeira para staff_id
     $CI->dbforge->add_key('role_id'); // Adiciona chave estrangeira para role_id
-    $CI->dbforge->create_table('multi_pipeline_assignments', TRUE); // Cria a tabela se não existir
+    $CI->dbforge->create_table('multi_pipeline_assignments', TRUE); // Cria a tabela se n達o existir
+}
+
+/**
+ * Cria a tabela de associações entre formulários, pipelines e estágios
+ */
+function create_form_associations_table($CI)
+{
+    $fields = array(
+        'id' => array(
+            'type' => 'INT',
+            'constraint' => 11,
+            'unsigned' => TRUE,
+            'auto_increment' => TRUE
+        ),
+        'form_id' => array(
+            'type' => 'INT',
+            'constraint' => 11,
+            'unsigned' => TRUE,
+        ),
+        'pipeline_id' => array(
+            'type' => 'INT',
+            'constraint' => 11,
+            'unsigned' => TRUE,
+        ),
+        'stage_id' => array(
+            'type' => 'INT',
+            'constraint' => 11,
+            'unsigned' => TRUE,
+        ),
+        'created_at' => array(
+            'type' => 'DATETIME',
+            'null' => FALSE,
+            'default' => date('Y-m-d H:i:s')
+        ),
+        'updated_at' => array(
+            'type' => 'DATETIME',
+            'null' => TRUE
+        ),
+    );
+
+    $CI->dbforge->add_field($fields);
+    $CI->dbforge->add_key('id', TRUE);
+    $CI->dbforge->add_key(['form_id', 'pipeline_id', 'stage_id']);
+    $CI->dbforge->create_table('multi_pipeline_form_associations', TRUE);
 }
