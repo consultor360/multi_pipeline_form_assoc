@@ -8,6 +8,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
  */
 class Multi_pipeline_model extends App_Model
 {
+        // Declaração explícita das propriedades
+        protected $table_pipelines;
+        protected $table_stages;
+        protected $table_leads;
+
     public function __construct()
     {
         parent::__construct();
@@ -21,10 +26,12 @@ class Multi_pipeline_model extends App_Model
         $this->load->model('multi_pipeline/Pipeline_model', 'pipeline_model');
         $this->load->model('multi_pipeline/Pipeline_model', 'Lead_model');
         
+        $this->load->database(); 
+
         // Inicializar variáveis de configuração
-        $this->table_pipelines = 'tblmulti_pipeline_pipelines';
-        $this->table_stages = 'tblmulti_pipeline_stages';
-        $this->table_leads = 'tblleads';
+        $this->table_pipelines = db_prefix() . 'multi_pipeline_pipelines';
+        $this->table_stages = db_prefix() . 'multi_pipeline_stages';
+        $this->table_leads = db_prefix() . 'multi_pipeline_leads';
     }
 
     /**
