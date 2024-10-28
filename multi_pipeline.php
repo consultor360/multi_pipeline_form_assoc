@@ -109,12 +109,6 @@ function multi_pipeline_init_menu_items() {
             'icon'     => 'fa fa-plus',
         ],
         */
-        [
-            'slug'     => 'form-associations',
-            'name'     => _l('Form Associations'),
-            'href'     => admin_url('multi_pipeline/form_associations'),
-            'icon'     => 'fa fa-link',
-        ],
         
         [
             'slug'     => 'create-status',
@@ -127,6 +121,12 @@ function multi_pipeline_init_menu_items() {
             'name'     => _l('View Statuses'),
             'href'     => admin_url('multi_pipeline/status'),
             'icon'     => 'fa fa-list',
+        ],
+        [
+            'slug'     => 'form-associations',
+            'name'     => _l('Form Associations'),
+            'href'     => admin_url('multi_pipeline/form_associations'),
+            'icon'     => 'fa fa-link',
         ],
         [
             'slug'     => 'view-api',
